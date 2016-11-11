@@ -1,2 +1,3 @@
 *.swp
-bright
+*.o
+plain

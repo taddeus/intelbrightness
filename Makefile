@@ -1,12 +1,11 @@
 CFLAGS := -Wall -Wextra -O2
 TARGET ?= /usr/bin/intelbrightness
 
-all: bright
+all: plain
 
-bright: bright.c setuid.c
-	$(CC) $(CFLAGS) -o $@ $<
+plain: plain.c bright.o
 
-install: bright
+install: plain
 	cp $< $(TARGET)
 	chown root:root $(TARGET)
 	chmod 4711 $(TARGET)
@@ -15,4 +14,4 @@ uninstall:
 	rm $(TARGET)
 
 clean:
-	rm -f bright
+	rm -f plain
