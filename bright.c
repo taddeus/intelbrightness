@@ -85,8 +85,14 @@ static void write_long(char *path, long value) {
     fclose(f);
 }
 
-static inline long current_brightness() { return read_long(BRIGHTNESS); }
-static inline long max_brightness()     { return read_long(MAX_BRIGHTNESS); }
+
+long current_brightness() {
+    return read_long(BRIGHTNESS);
+}
+
+long max_brightness()     {
+    return read_long(MAX_BRIGHTNESS);
+}
 
 void set_brightness(long level) {
     if (level < 1) {
