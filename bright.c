@@ -68,44 +68,44 @@ static void check(int condition, char *message) {
     }
 }
 
-static long read_long(char *path) {
+static int read_int(char *path) {
     FILE *f = fopen_check(path, "r");
-    long value;
-    check(fscanf(f, "%ld", &value) == 1, "could not read number");
+    int value;
+    check(fscanf(f, "%d", &value) == 1, "could not read number");
     fclose(f);
     return value;
 }
 
-static void write_long(char *path, long value) {
+static void write_int(char *path, int value) {
     init_uids();
     do_setuid();
     FILE *f = fopen_check(path, "w");
     undo_setuid();
-    check(fprintf(f, "%ld\n", value) > 0, "could not write number");
+    check(fprintf(f, "%d\n", value) > 0, "could not write number");
     fclose(f);
 }
 
 
-long current_brightness() {
-    return read_long(BRIGHTNESS);
+int current_brightness() {
+    return read_int(BRIGHTNESS);
 }
 
-long max_brightness()     {
-    return read_long(MAX_BRIGHTNESS);
+int max_brightness()     {
+    return read_int(MAX_BRIGHTNESS);
 }
 
-void set_brightness(long level) {
+void set_brightness(int level) {
     if (level < 1) {
         level = 1;
     } else {
-        long max = max_brightness();
+        int max = max_brightness();
         if (level > max)
             level = max;
     }
 
-    write_long(BRIGHTNESS, level);
+    write_int(BRIGHTNESS, level);
 }
 
-void inc_brightness(long amount) {
+void inc_brightness(int amount) {
     set_brightness(current_brightness() + amount);
 }

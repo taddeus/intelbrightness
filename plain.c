@@ -9,11 +9,11 @@ int main(int argc, char **argv) {
     }
 
     if (argv[1][0] == '+') {
-        inc_brightness(atol(&argv[1][1]));
+        inc_brightness(atoi(&argv[1][1]));
     } else if (argv[1][0] == '-') {
-        inc_brightness(-atol(&argv[1][1]));
+        inc_brightness(-atoi(&argv[1][1]));
     } else {
-        set_brightness(atol(argv[1]));
+        set_brightness(atoi(argv[1]));
     }
 
     return 0;
