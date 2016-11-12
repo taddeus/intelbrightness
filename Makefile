@@ -1,9 +1,13 @@
 CFLAGS := -Wall -Wextra -O2
 TARGET ?= /usr/bin/intelbrightness
 
-all: plain
+all: plain flame
 
 plain: plain.c bright.o
+
+flame: flame.c bright.o
+flame: CFLAGS += $(shell pkg-config --cflags cairo)
+flame: LDFLAGS += $(shell pkg-config --libs cairo)
 
 install: plain
 	cp $< $(TARGET)
@@ -14,4 +18,4 @@ uninstall:
 	rm $(TARGET)
 
 clean:
-	rm -f plain
+	rm -f plain flame
